@@ -1,0 +1,1331 @@
+Microsoft Windows [Version 10.0.26200.9550]
+(c) Microsoft Corporation. All rights reserved.
+
+D:\STudy\Docker_Kubernets Explorer>mkdir
+The syntax of the command is incorrect.
+
+D:\STudy\Docker_Kubernets Explorer>mkdir compose-demo
+
+D:\STudy\Docker_Kubernets Explorer>cd compose-demo
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>notepad compose.yaml
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>docker compose up -d
+go-yaml load error in scanner (while scanning for the next token) at L2.C1: found character that cannot start any token
+
+What's next:
+    Debug this Compose error with Gordon → docker ai "help me fix this compose error"
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>ls
+'ls' is not recognized as an internal or external command,
+operable program or batch file.
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>docker compose up -d
+[+] up 3/3
+ ✔ Network compose-demo_default    Created                                                                          0.1s
+ ✔ Container compose-demo-web-1    Started                                                                          1.2s
+ ✔ Container compose-demo-client-1 Started                                                                          0.5s
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>docker compose ps
+NAME                    IMAGE            COMMAND                  SERVICE   CREATED          STATUS          PORTS
+compose-demo-client-1   busybox:latest   "sh -c 'sleep 3600'"     client    24 seconds ago   Up 24 seconds
+compose-demo-web-1      nginx:latest     "/docker-entrypoint.…"   web       24 seconds ago   Up 23 seconds   0.0.0.0:8083->80/tcp, [::]:8083->80/tcp
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>docker compose exec client sh
+/ # wget -qO- http://web
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome to nginx!</title>
+<style>
+html { color-scheme: light dark; }
+body { width: 35em; margin: 0 auto;
+font-family: Tahoma, Verdana, Arial, sans-serif; }
+</style>
+</head>
+<body>
+<h1>Welcome to nginx!</h1>
+<p>If you see this page, nginx is successfully installed and working.
+Further configuration is required for the web server, reverse proxy,
+API gateway, load balancer, content cache, or other features.</p>
+
+<p>For online documentation and support please refer to
+<a href="https://nginx.org/">nginx.org</a>.<br/>
+To engage with the community please visit
+<a href="https://community.nginx.org/">community.nginx.org</a>.<br/>
+For enterprise grade support, professional services, additional
+security features and capabilities please refer to
+<a href="https://f5.com/nginx">f5.com/nginx</a>.</p>
+
+<p><em>Thank you for using nginx.</em></p>
+</body>
+</html>
+/ # wget -qO- http://localhost
+wget: can't connect to remote host (127.0.0.1): Connection refused
+/ # exit
+
+What's next:
+    Debug this Compose error with Gordon → docker ai "help me fix this compose error"
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>docker compose down
+[+] down 3/3
+ ✔ Container compose-demo-client-1 Removed                                                                                                              3.3s
+ ✔ Container compose-demo-web-1    Removed                                                                                                              0.5s
+ ✔ Network compose-demo_default    Removed                                                                                                              0.3s
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>docker compose ps
+NAME      IMAGE     COMMAND   SERVICE   CREATED   STATUS    PORTS
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>docker compose up -d
+service volume services.web.volumes.[0] is missing a mount target
+
+What's next:
+    Debug this Compose error with Gordon → docker ai "help me fix this compose error"
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>docker compose up -d
+[+] up 4/4
+ ✔ Network compose-demo_default    Created                                                                                                              0.1s
+ ✔ Volume compose-demo_webdata     Created                                                                                                              0.0s
+ ✔ Container compose-demo-web-1    Started                                                                                                              0.8s
+ ✔ Container compose-demo-client-1 Started                                                                                                              0.5s
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>docker compose ps
+NAME                    IMAGE            COMMAND                  SERVICE   CREATED          STATUS          PORTS
+compose-demo-client-1   busybox:latest   "sh -c 'sleep 3600'"     client    27 seconds ago   Up 27 seconds
+compose-demo-web-1      nginx:latest     "/docker-entrypoint.…"   web       27 seconds ago   Up 27 seconds   0.0.0.0:8083->80/tcp, [::]:8083->80/tcp
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>docker compose exec web sh
+# echo '<h1>Hello Form Compose Volume</h1>' > /use/share/nginx/html/index.html
+sh: 1: cannot create /use/share/nginx/html/index.html: Directory nonexistent
+# echo '<h1>Hello Form Compose Volume</h1>' > /usr/share/nginx/html/index.html
+# exit
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>docker compose down
+[+] down 3/3
+ ✔ Container compose-demo-web-1    Removed                                                                                                              3.5s
+ ✔ Container compose-demo-client-1 Removed                                                                                                              3.4s
+ ✔ Network compose-demo_default    Removed                                                                                                              0.3s
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>docker volume ls
+DRIVER    VOLUME NAME
+local     compose-demo_webdata
+local     mydata
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>docker compose up -d
+[+] up 3/3
+ ✔ Network compose-demo_default    Created                                                                                                              0.1s
+ ✔ Container compose-demo-web-1    Started                                                                                                              0.5s
+ ✔ Container compose-demo-client-1 Started                                                                                                              0.8s
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>docker compose down
+[+] down 3/3
+ ✔ Container compose-demo-client-1 Removed                                                                                                              3.4s
+ ✔ Container compose-demo-web-1    Removed                                                                                                              0.6s
+ ✔ Network compose-demo_default    Removed                                                                                                              0.2s
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl version
+Client Version: v1.36.1
+Kustomize Version: v5.8.1
+Server Version: v1.36.1
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl get nodes
+NAME                    STATUS   ROLES           AGE     VERSION
+desktop-control-plane   Ready    control-plane   8m17s   v1.36.1
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>docker run -d --name my-nginx nginx
+docker: Error response from daemon: Conflict. The container name "/my-nginx" is already in use by container "41d3f386858ec4f4cd5e0be85d9bb68e4fb9df8064e44aed89a2ede0096cac14". You have to remove (or rename) that container to be able to reuse that name.
+
+Run 'docker run --help' for more information
+
+What's next:
+    Debug this container error with Gordon → docker ai "help me fix this container error"
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>docker start my-nginx
+my-nginx
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>docker stop my-nginx
+my-nginx
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl run my-nginx --image=nginx
+pod/my-nginx created
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl get pods
+NAME       READY   STATUS    RESTARTS   AGE
+my-nginx   1/1     Running   0          24s
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl describe pod my-nginx
+Name:             my-nginx
+Namespace:        default
+Priority:         0
+Service Account:  default
+Node:             desktop-control-plane/172.19.0.2
+Start Time:       Fri, 02 Oct 2026 18:00:34 +0530
+Labels:           run=my-nginx
+Annotations:      <none>
+Status:           Running
+IP:               10.244.0.5
+IPs:
+  IP:  10.244.0.5
+Containers:
+  my-nginx:
+    Container ID:   containerd://a026e9b270970ce3c3f2f2041b9aea75767edd6d7e59a5e59f0fbfa2c7ac6287
+    Image:          nginx
+    Image ID:       docker.io/library/nginx@sha256:abe47724e466aeab9a345d8e46a221c2fa8953c7848bb4a3bd9976a7199f8cf2
+    Port:           <none>
+    Host Port:      <none>
+    State:          Running
+      Started:      Fri, 02 Oct 2026 18:00:37 +0530
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-wm588 (ro)
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   True
+  Initialized                 True
+  Ready                       True
+  ContainersReady             True
+  PodScheduled                True
+Volumes:
+  kube-api-access-wm588:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    Optional:                false
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type    Reason     Age    From               Message
+  ----    ------     ----   ----               -------
+  Normal  Scheduled  5m40s  default-scheduler  Successfully assigned default/my-nginx to desktop-control-plane
+  Normal  Pulling    5m39s  kubelet            spec.containers{my-nginx}: Pulling image "nginx"
+  Normal  Pulled     5m37s  kubelet            spec.containers{my-nginx}: Successfully pulled image "nginx" in 2.431s (2.431s including waiting). Image size: 63422407 bytes.
+  Normal  Created    5m37s  kubelet            spec.containers{my-nginx}: Container created
+  Normal  Started    5m37s  kubelet            spec.containers{my-nginx}: Container started
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>docker inspect
+docker: 'docker inspect' requires at least 1 argument
+
+Usage:  docker inspect [OPTIONS] NAME|ID [NAME|ID...]
+
+See 'docker inspect --help' for more information
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>docker inspect my-nginx
+[
+    {
+        "Id": "41d3f386858ec4f4cd5e0be85d9bb68e4fb9df8064e44aed89a2ede0096cac14",
+        "Created": "2026-09-29T17:35:48.921888469Z",
+        "Path": "/docker-entrypoint.sh",
+        "Args": [
+            "nginx",
+            "-g",
+            "daemon off;"
+        ],
+        "State": {
+            "Status": "exited",
+            "Running": false,
+            "Paused": false,
+            "Restarting": false,
+            "OOMKilled": false,
+            "Dead": false,
+            "Pid": 0,
+            "ExitCode": 0,
+            "Error": "",
+            "StartedAt": "2026-10-02T12:29:39.319160836Z",
+            "FinishedAt": "2026-10-02T12:30:03.385424974Z"
+        },
+        "Image": "sha256:abe47724e466aeab9a345d8e46a221c2fa8953c7848bb4a3bd9976a7199f8cf2",
+        "ResolvConfPath": "/var/lib/docker/containers/41d3f386858ec4f4cd5e0be85d9bb68e4fb9df8064e44aed89a2ede0096cac14/resolv.conf",
+        "HostnamePath": "/var/lib/docker/containers/41d3f386858ec4f4cd5e0be85d9bb68e4fb9df8064e44aed89a2ede0096cac14/hostname",
+        "HostsPath": "/var/lib/docker/containers/41d3f386858ec4f4cd5e0be85d9bb68e4fb9df8064e44aed89a2ede0096cac14/hosts",
+        "LogPath": "/var/lib/docker/containers/41d3f386858ec4f4cd5e0be85d9bb68e4fb9df8064e44aed89a2ede0096cac14/41d3f386858ec4f4cd5e0be85d9bb68e4fb9df8064e44aed89a2ede0096cac14-json.log",
+        "Name": "/my-nginx",
+        "RestartCount": 0,
+        "Driver": "overlayfs",
+        "Platform": "linux",
+        "MountLabel": "",
+        "ProcessLabel": "",
+        "AppArmorProfile": "",
+        "ExecIDs": null,
+        "HostConfig": {
+            "Binds": null,
+            "ContainerIDFile": "",
+            "LogConfig": {
+                "Type": "json-file",
+                "Config": {}
+            },
+            "NetworkMode": "bridge",
+            "PortBindings": {
+                "80/tcp": [
+                    {
+                        "HostIp": "",
+                        "HostPort": "8080"
+                    }
+                ]
+            },
+            "RestartPolicy": {
+                "Name": "no",
+                "MaximumRetryCount": 0
+            },
+            "AutoRemove": false,
+            "VolumeDriver": "",
+            "VolumesFrom": null,
+            "ConsoleSize": [
+                30,
+                120
+            ],
+            "CapAdd": null,
+            "CapDrop": null,
+            "CgroupnsMode": "private",
+            "Dns": [],
+            "DnsOptions": [],
+            "DnsSearch": [],
+            "ExtraHosts": null,
+            "GroupAdd": null,
+            "IpcMode": "private",
+            "Cgroup": "",
+            "Links": null,
+            "OomScoreAdj": 0,
+            "PidMode": "",
+            "Privileged": false,
+            "PublishAllPorts": false,
+            "ReadonlyRootfs": false,
+            "SecurityOpt": null,
+            "UTSMode": "",
+            "UsernsMode": "",
+            "ShmSize": 67108864,
+            "Runtime": "runc",
+            "Isolation": "",
+            "CpuShares": 0,
+            "Memory": 0,
+            "NanoCpus": 0,
+            "CgroupParent": "",
+            "BlkioWeight": 0,
+            "BlkioWeightDevice": [],
+            "BlkioDeviceReadBps": [],
+            "BlkioDeviceWriteBps": [],
+            "BlkioDeviceReadIOps": [],
+            "BlkioDeviceWriteIOps": [],
+            "CpuPeriod": 0,
+            "CpuQuota": 0,
+            "CpuRealtimePeriod": 0,
+            "CpuRealtimeRuntime": 0,
+            "CpusetCpus": "",
+            "CpusetMems": "",
+            "Devices": [],
+            "DeviceCgroupRules": null,
+            "DeviceRequests": null,
+            "MemoryReservation": 0,
+            "MemorySwap": 0,
+            "MemorySwappiness": null,
+            "OomKillDisable": null,
+            "PidsLimit": null,
+            "Ulimits": null,
+            "CpuCount": 0,
+            "CpuPercent": 0,
+            "IOMaximumIOps": 0,
+            "IOMaximumBandwidth": 0,
+            "MaskedPaths": [
+                "/proc/acpi",
+                "/proc/asound",
+                "/proc/interrupts",
+                "/proc/kcore",
+                "/proc/keys",
+                "/proc/latency_stats",
+                "/proc/sched_debug",
+                "/proc/scsi",
+                "/proc/timer_list",
+                "/proc/timer_stats",
+                "/sys/devices/virtual/powercap",
+                "/sys/firmware"
+            ],
+            "ReadonlyPaths": [
+                "/proc/bus",
+                "/proc/fs",
+                "/proc/irq",
+                "/proc/sys",
+                "/proc/sysrq-trigger"
+            ]
+        },
+        "Storage": {
+            "RootFS": {
+                "Snapshot": {
+                    "Name": "overlayfs"
+                }
+            }
+        },
+        "Mounts": [],
+        "Config": {
+            "Hostname": "41d3f386858e",
+            "Domainname": "",
+            "User": "",
+            "AttachStdin": false,
+            "AttachStdout": false,
+            "AttachStderr": false,
+            "ExposedPorts": {
+                "80/tcp": {}
+            },
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": [
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "NGINX_VERSION=1.31.6",
+                "NJS_VERSION=1.0.1",
+                "NJS_RELEASE=1~trixie",
+                "ACME_VERSION=0.4.1",
+                "PKG_RELEASE=1~trixie",
+                "DYNPKG_RELEASE=1~trixie"
+            ],
+            "Cmd": [
+                "nginx",
+                "-g",
+                "daemon off;"
+            ],
+            "Image": "nginx",
+            "Volumes": null,
+            "WorkingDir": "",
+            "Entrypoint": [
+                "/docker-entrypoint.sh"
+            ],
+            "Labels": {
+                "maintainer": "NGINX Docker Maintainers \u003cdocker-maint@nginx.com\u003e"
+            },
+            "StopSignal": "SIGQUIT"
+        },
+        "NetworkSettings": {
+            "SandboxID": "",
+            "SandboxKey": "",
+            "Ports": {},
+            "Networks": {
+                "bridge": {
+                    "IPAMConfig": null,
+                    "Links": null,
+                    "Aliases": null,
+                    "DriverOpts": null,
+                    "GwPriority": 0,
+                    "NetworkID": "a2db5b1e7f46774ee6640e7e3ae3a077c219637c2caa4ad2b5f23d4547e145c4",
+                    "EndpointID": "",
+                    "Gateway": "",
+                    "IPAddress": "",
+                    "MacAddress": "",
+                    "IPPrefixLen": 0,
+                    "IPv6Gateway": "",
+                    "GlobalIPv6Address": "",
+                    "GlobalIPv6PrefixLen": 0,
+                    "DNSNames": null
+                }
+            }
+        },
+        "ImageManifestDescriptor": {
+            "mediaType": "application/vnd.oci.image.manifest.v1+json",
+            "digest": "sha256:9c0f39aa1c46f5062ba080555a067ebb82d5f63a8cf4d63f6ef2e76fc9ff2d0c",
+            "size": 2290,
+            "annotations": {
+                "com.docker.official-images.bashbrew.arch": "amd64",
+                "org.opencontainers.image.base.digest": "sha256:7792b1f7702a86946cd518db72b6a407302c3e9bc1635634368b878189e8221c",
+                "org.opencontainers.image.base.name": "debian:trixie-slim",
+                "org.opencontainers.image.created": "2026-09-19T00:19:58Z",
+                "org.opencontainers.image.revision": "a16f1329e13e7273c4103f75d863ca625b75109e",
+                "org.opencontainers.image.source": "https://github.com/nginx/docker-nginx.git#a16f1329e13e7273c4103f75d863ca625b75109e:mainline/debian",
+                "org.opencontainers.image.url": "https://hub.docker.com/_/nginx",
+                "org.opencontainers.image.version": "1.31.6"
+            },
+            "platform": {
+                "architecture": "amd64",
+                "os": "linux"
+            }
+        }
+    }
+]
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl exec -it my-nginx sh
+error: exec [POD] [COMMAND] is not supported anymore. Use exec [POD] -- [COMMAND] instead
+See 'kubectl exec -h' for help and examples
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl exec -it my-nginx --sh
+error: unknown flag: --sh
+See 'kubectl exec --help' for usage.
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl exec -it my-nginx -- sh
+# hostmane
+sh: 1: hostmane: not found
+# hostname
+my-nginx
+# ls
+bin   dev                  docker-entrypoint.sh  home  lib64  mnt  proc          root  sbin  sys  usr
+boot  docker-entrypoint.d  etc                   lib   media  opt  product_uuid  run   srv   tmp  var
+# cat /etc/os-release
+PRETTY_NAME="Debian GNU/Linux 13 (trixie)"
+NAME="Debian GNU/Linux"
+VERSION_ID="13"
+VERSION="13 (trixie)"
+VERSION_CODENAME=trixie
+DEBIAN_VERSION_FULL=13.7
+ID=debian
+HOME_URL="https://www.debian.org/"
+SUPPORT_URL="https://www.debian.org/support"
+BUG_REPORT_URL="https://bugs.debian.org/"
+# cat /etc/os-release
+PRETTY_NAME="Debian GNU/Linux 13 (trixie)"
+NAME="Debian GNU/Linux"
+VERSION_ID="13"
+VERSION="13 (trixie)"
+VERSION_CODENAME=trixie
+DEBIAN_VERSION_FULL=13.7
+ID=debian
+HOME_URL="https://www.debian.org/"
+SUPPORT_URL="https://www.debian.org/support"
+BUG_REPORT_URL="https://bugs.debian.org/"
+# exit
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl delete pod my-nginx
+pod "my-nginx" deleted from default namespace
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl get pods
+No resources found in default namespace.
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl create deployment nginx-deployment --image=nginx
+deployment.apps/nginx-deployment created
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl get deployments
+NAME               READY   UP-TO-DATE   AVAILABLE   AGE
+nginx-deployment   1/1     1            1           16s
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl get pods
+NAME                                READY   STATUS    RESTARTS   AGE
+nginx-deployment-7d6869886d-bbg9h   1/1     Running   0          32s
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl scale deployments nginx-deployment --replicas=3
+deployment.apps/nginx-deployment scaled
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl get pods
+NAME                                READY   STATUS    RESTARTS   AGE
+nginx-deployment-7d6869886d-5nm7l   1/1     Running   0          12s
+nginx-deployment-7d6869886d-89mdz   1/1     Running   0          12s
+nginx-deployment-7d6869886d-bbg9h   1/1     Running   0          3m6s
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl delete pod nginx-deployment-7d6869886d-bbg9h
+pod "nginx-deployment-7d6869886d-bbg9h" deleted from default namespace
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl get pods
+NAME                                READY   STATUS    RESTARTS   AGE
+nginx-deployment-7d6869886d-5nm7l   1/1     Running   0          73s
+nginx-deployment-7d6869886d-89mdz   1/1     Running   0          73s
+nginx-deployment-7d6869886d-bgrd9   1/1     Running   0          5s
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl get pods -a
+error: unknown shorthand flag: 'a' in -a
+See 'kubectl get --help' for usage.
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl get replica-set
+error: the server doesn't have a resource type "replica-set"
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl get replicasets
+NAME                          DESIRED   CURRENT   READY   AGE
+nginx-deployment-7d6869886d   3         3         3       8m36s
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl describe deployment nginx-deployment
+Name:                   nginx-deployment
+Namespace:              default
+CreationTimestamp:      Fri, 02 Oct 2026 18:22:59 +0530
+Labels:                 app=nginx-deployment
+Annotations:            deployment.kubernetes.io/revision: 1
+Selector:               app=nginx-deployment
+Replicas:               3 desired | 3 updated | 3 total | 3 available | 0 unavailable
+StrategyType:           RollingUpdate
+MinReadySeconds:        0
+RollingUpdateStrategy:  25% max unavailable, 25% max surge
+Pod Template:
+  Labels:  app=nginx-deployment
+  Containers:
+   nginx:
+    Image:         nginx
+    Port:          <none>
+    Host Port:     <none>
+    Environment:   <none>
+    Mounts:        <none>
+  Volumes:         <none>
+  Node-Selectors:  <none>
+  Tolerations:     <none>
+Conditions:
+  Type           Status  Reason
+  ----           ------  ------
+  Progressing    True    NewReplicaSetAvailable
+  Available      True    MinimumReplicasAvailable
+OldReplicaSets:  <none>
+NewReplicaSet:   nginx-deployment-7d6869886d (3/3 replicas created)
+Events:
+  Type    Reason             Age    From                   Message
+  ----    ------             ----   ----                   -------
+  Normal  ScalingReplicaSet  9m22s  deployment-controller  Scaled up replica set nginx-deployment-7d6869886d from 0 to 1
+  Normal  ScalingReplicaSet  6m28s  deployment-controller  Scaled up replica set nginx-deployment-7d6869886d from 1 to 3
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl expose deployment nginx-deployment --type=NodePort --port=80
+service/nginx-deployment exposed
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl get services
+NAME               TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)        AGE
+kubernetes         ClusterIP   10.96.0.1       <none>        443/TCP        135m
+nginx-deployment   NodePort    10.96.118.242   <none>        80:32430/TCP   10s
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl get pods
+NAME                                READY   STATUS    RESTARTS   AGE
+nginx-deployment-7d6869886d-5nm7l   1/1     Running   0          29m
+nginx-deployment-7d6869886d-89mdz   1/1     Running   0          29m
+nginx-deployment-7d6869886d-bgrd9   1/1     Running   0          28m
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl get services nginx-deployment
+NAME               TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)        AGE
+nginx-deployment   NodePort   10.96.118.242   <none>        80:32430/TCP   6m18s
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl port-forward services/nginx-deployment 8080:80
+Forwarding from 127.0.0.1:8080 -> 80
+Forwarding from [::1]:8080 -> 80
+Handling connection for 8080
+Handling connection for 8080
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl get pods -o wide
+NAME                                READY   STATUS    RESTARTS   AGE   IP           NODE                    NOMINATED NODE   READINESS GATES
+nginx-deployment-7d6869886d-5nm7l   1/1     Running   0          34m   10.244.0.8   desktop-control-plane   <none>           <none>
+nginx-deployment-7d6869886d-89mdz   1/1     Running   0          34m   10.244.0.7   desktop-control-plane   <none>           <none>
+nginx-deployment-7d6869886d-bgrd9   1/1     Running   0          33m   10.244.0.9   desktop-control-plane   <none>           <none>
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl get pods show lables
+Error from server (NotFound): pods "show" not found
+Error from server (NotFound): pods "lables" not found
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl get pods --show-lables
+error: unknown flag: --show-lables
+See 'kubectl get --help' for usage.
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl get pods --show-labels
+NAME                                READY   STATUS    RESTARTS   AGE   LABELS
+nginx-deployment-7d6869886d-5nm7l   1/1     Running   0          46m   app=nginx-deployment,pod-template-hash=7d6869886d
+nginx-deployment-7d6869886d-89mdz   1/1     Running   0          46m   app=nginx-deployment,pod-template-hash=7d6869886d
+nginx-deployment-7d6869886d-bgrd9   1/1     Running   0          45m   app=nginx-deployment,pod-template-hash=7d6869886d
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl describe service ngnix-deployment
+Error from server (NotFound): services "ngnix-deployment" not found
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl describe service nginx-deployment
+Name:                     nginx-deployment
+Namespace:                default
+Labels:                   app=nginx-deployment
+Annotations:              <none>
+Selector:                 app=nginx-deployment
+Type:                     NodePort
+IP Family Policy:         SingleStack
+IP Families:              IPv4
+IP:                       10.96.118.242
+IPs:                      10.96.118.242
+Port:                     <unset>  80/TCP
+TargetPort:               80/TCP
+NodePort:                 <unset>  32430/TCP
+Endpoints:                10.244.0.8:80,10.244.0.9:80,10.244.0.7:80
+Session Affinity:         None
+External Traffic Policy:  Cluster
+Internal Traffic Policy:  Cluster
+Events:                   <none>
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl get pods --show-labels
+NAME                                READY   STATUS    RESTARTS   AGE   LABELS
+nginx-deployment-7d6869886d-5nm7l   1/1     Running   0          54m   app=nginx-deployment,pod-template-hash=7d6869886d
+nginx-deployment-7d6869886d-89mdz   1/1     Running   0          54m   app=nginx-deployment,pod-template-hash=7d6869886d
+nginx-deployment-7d6869886d-bgrd9   1/1     Running   0          53m   app=nginx-deployment,pod-template-hash=7d6869886d
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl run test-pod --image=nginx --labels="app=other"
+pod/test-pod created
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl get pods --show-labels
+NAME                                READY   STATUS    RESTARTS   AGE   LABELS
+nginx-deployment-7d6869886d-5nm7l   1/1     Running   0          55m   app=nginx-deployment,pod-template-hash=7d6869886d
+nginx-deployment-7d6869886d-89mdz   1/1     Running   0          55m   app=nginx-deployment,pod-template-hash=7d6869886d
+nginx-deployment-7d6869886d-bgrd9   1/1     Running   0          54m   app=nginx-deployment,pod-template-hash=7d6869886d
+test-pod                            1/1     Running   0          15s   app=other
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl describe services nginx-deployments
+Error from server (NotFound): services "nginx-deployments" not found
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl describe services nginx-deployment
+Name:                     nginx-deployment
+Namespace:                default
+Labels:                   app=nginx-deployment
+Annotations:              <none>
+Selector:                 app=nginx-deployment
+Type:                     NodePort
+IP Family Policy:         SingleStack
+IP Families:              IPv4
+IP:                       10.96.118.242
+IPs:                      10.96.118.242
+Port:                     <unset>  80/TCP
+TargetPort:               80/TCP
+NodePort:                 <unset>  32430/TCP
+Endpoints:                10.244.0.8:80,10.244.0.9:80,10.244.0.7:80
+Session Affinity:         None
+External Traffic Policy:  Cluster
+Internal Traffic Policy:  Cluster
+Events:                   <none>
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>notepad deployments.yaml
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl apply -f nginx-yaml-deployment.yaml
+error: unable to decode "nginx-yaml-deployment.yaml": json: cannot unmarshal string into Go struct field metadataOnlyObject.metadata of type v1.ObjectMeta
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl apply -f nginx-yaml-deployment.yaml
+Error from server (BadRequest): error when creating "nginx-yaml-deployment.yaml": Deployment in version "v1" cannot be handled as a Deployment: json: cannot unmarshal string into Go struct field LabelSelector.spec.selector.matchLabels of type map[string]string
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl apply -f nginx-yaml-deployment.yaml
+Error from server (BadRequest): error when creating "nginx-yaml-deployment.yaml": Deployment in version "v1" cannot be handled as a Deployment: json: cannot unmarshal string into Go struct field LabelSelector.spec.selector.matchLabels of type map[string]string
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl apply -f nginx-yaml-deployment.yaml
+Error from server (BadRequest): error when creating "nginx-yaml-deployment.yaml": Deployment in version "v1" cannot be handled as a Deployment: json: cannot unmarshal object into Go struct field PodSpec.spec.template.spec.containers of type []v1.Container
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl apply -f nginx-yaml-deployment.yaml
+Error from server (BadRequest): error when creating "nginx-yaml-deployment.yaml": Deployment in version "v1" cannot be handled as a Deployment: json: cannot unmarshal object into Go struct field Container.spec.template.spec.containers.ports of type []v1.ContainerPort
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl apply -f nginx-yaml-deployment.yaml
+Error from server (BadRequest): error when creating "nginx-yaml-deployment.yaml": Deployment in version "v1" cannot be handled as a Deployment: strict decoding error: unknown field "spec.template.metadata.Labels"
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl apply -f nginx-yaml-deployment.yaml
+The Deployment "nginx-yaml-Deployment" is invalid: metadata.name: Invalid value: "nginx-yaml-Deployment": a lowercase RFC 1123 subdomain must consist of lower case alphanumeric characters, '-' or '.', and must start and end with an alphanumeric character (e.g. 'example.com', regex used for validation is '[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*')
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl apply -f nginx-yaml-deployment.yaml
+deployment.apps/nginx-yaml-deployment created
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl get deployments
+NAME                    READY   UP-TO-DATE   AVAILABLE   AGE
+nginx-deployment        3/3     3            3           106m
+nginx-yaml-deployment   3/3     3            3           17s
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl get pods --show-labels
+NAME                                   READY   STATUS    RESTARTS   AGE    LABELS
+nginx-deployment-7d6869886d-5nm7l      1/1     Running   0          104m   app=nginx-deployment,pod-template-hash=7d6869886d
+nginx-deployment-7d6869886d-89mdz      1/1     Running   0          104m   app=nginx-deployment,pod-template-hash=7d6869886d
+nginx-deployment-7d6869886d-bgrd9      1/1     Running   0          102m   app=nginx-deployment,pod-template-hash=7d6869886d
+nginx-yaml-deployment-7bc6d8c9-h8vvx   1/1     Running   0          58s    app=nginx-yaml,pod-template-hash=7bc6d8c9
+nginx-yaml-deployment-7bc6d8c9-kjt56   1/1     Running   0          58s    app=nginx-yaml,pod-template-hash=7bc6d8c9
+nginx-yaml-deployment-7bc6d8c9-mvrn9   1/1     Running   0          58s    app=nginx-yaml,pod-template-hash=7bc6d8c9
+test-pod                               1/1     Running   0          48m    app=other
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl apply -f nginx-yaml-services.yaml
+error: the path "nginx-yaml-services.yaml" does not exist
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl apply -f nginx-yaml-service.yaml
+Error from server (BadRequest): error when creating "nginx-yaml-service.yaml": Service in version "v1" cannot be handled as a Service: strict decoding error: unknown field "spec.port", unknown field "spec.ports[0].protocols", unknown field "spec.targetPort"
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl apply -f nginx-yaml-service.yaml
+Error from server (BadRequest): error when creating "nginx-yaml-service.yaml": Service in version "v1" cannot be handled as a Service: strict decoding error: unknown field "spec.ports[0].protocols", unknown field "spec.ports[0].type"
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl apply -f nginx-yaml-service.yaml
+Error from server (BadRequest): error when creating "nginx-yaml-service.yaml": Service in version "v1" cannot be handled as a Service: strict decoding error: unknown field "spec.ports[0].type"
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl apply -f nginx-yaml-service.yaml
+The Service "nginx-yaml-Service" is invalid: metadata.name: Invalid value: "nginx-yaml-Service": a lowercase RFC 1123 label must consist of lower case alphanumeric characters or '-', and must start and end with an alphanumeric character (e.g. 'my-name',  or '123-abc', regex used for validation is '[a-z0-9]([-a-z0-9]*[a-z0-9])?')
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl apply -f nginx-yaml-service.yaml
+service/nginx-yaml-service created
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl get services
+NAME                 TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)        AGE
+kubernetes           ClusterIP   10.96.0.1       <none>        443/TCP        3h50m
+nginx-deployment     NodePort    10.96.118.242   <none>        80:32430/TCP   95m
+nginx-yaml-service   NodePort    10.96.181.24    <none>        80:30326/TCP   17s
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl describe services nginx-yaml-service
+Name:                     nginx-yaml-service
+Namespace:                default
+Labels:                   <none>
+Annotations:              <none>
+Selector:                 app=nginx-yaml
+Type:                     NodePort
+IP Family Policy:         SingleStack
+IP Families:              IPv4
+IP:                       10.96.181.24
+IPs:                      10.96.181.24
+Port:                     <unset>  80/TCP
+TargetPort:               80/TCP
+NodePort:                 <unset>  30326/TCP
+Endpoints:                10.244.0.12:80,10.244.0.13:80,10.244.0.11:80
+Session Affinity:         None
+External Traffic Policy:  Cluster
+Internal Traffic Policy:  Cluster
+Events:                   <none>
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl delete pod 10.244.0.12
+Error from server (NotFound): pods "10.244.0.12" not found
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl get pods
+NAME                                   READY   STATUS    RESTARTS   AGE
+nginx-deployment-7d6869886d-5nm7l      1/1     Running   0          125m
+nginx-deployment-7d6869886d-89mdz      1/1     Running   0          125m
+nginx-deployment-7d6869886d-bgrd9      1/1     Running   0          124m
+nginx-yaml-deployment-7bc6d8c9-h8vvx   1/1     Running   0          22m
+nginx-yaml-deployment-7bc6d8c9-kjt56   1/1     Running   0          22m
+nginx-yaml-deployment-7bc6d8c9-mvrn9   1/1     Running   0          22m
+test-pod                               1/1     Running   0          70m
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl delete pod nginx-yaml-deployment-7bc6d8c9-mvrn9
+pod "nginx-yaml-deployment-7bc6d8c9-mvrn9" deleted from default namespace
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl get pods
+NAME                                   READY   STATUS    RESTARTS   AGE
+nginx-deployment-7d6869886d-5nm7l      1/1     Running   0          126m
+nginx-deployment-7d6869886d-89mdz      1/1     Running   0          126m
+nginx-deployment-7d6869886d-bgrd9      1/1     Running   0          125m
+nginx-yaml-deployment-7bc6d8c9-h8vvx   1/1     Running   0          23m
+nginx-yaml-deployment-7bc6d8c9-kjt56   1/1     Running   0          23m
+nginx-yaml-deployment-7bc6d8c9-kztk6   1/1     Running   0          22s
+test-pod                               1/1     Running   0          70m
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl describe service nginx-yaml-service
+Name:                     nginx-yaml-service
+Namespace:                default
+Labels:                   <none>
+Annotations:              <none>
+Selector:                 app=nginx-yaml
+Type:                     NodePort
+IP Family Policy:         SingleStack
+IP Families:              IPv4
+IP:                       10.96.181.24
+IPs:                      10.96.181.24
+Port:                     <unset>  80/TCP
+TargetPort:               80/TCP
+NodePort:                 <unset>  30326/TCP
+Endpoints:                10.244.0.12:80,10.244.0.11:80,10.244.0.14:80
+Session Affinity:         None
+External Traffic Policy:  Cluster
+Internal Traffic Policy:  Cluster
+Events:                   <none>
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl port-forward service/nginx-yaml-service -d 8085:80
+error: unknown shorthand flag: 'd' in -d
+See 'kubectl port-forward --help' for usage.
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl port-forward service/nginx-yaml-service 8085:80
+Forwarding from 127.0.0.1:8085 -> 80
+Forwarding from [::1]:8085 -> 80
+Handling connection for 8085
+Handling connection for 8085
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kublect get replicasets
+'kublect' is not recognized as an internal or external command,
+operable program or batch file.
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kublect get replicaset
+'kublect' is not recognized as an internal or external command,
+operable program or batch file.
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl get replicaset
+NAME                             DESIRED   CURRENT   READY   AGE
+nginx-deployment-7d6869886d      3         3         3       4h8m
+nginx-yaml-deployment-7bc6d8c9   3         3         3       142m
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl get pods --show-labels
+NAME                                   READY   STATUS    RESTARTS   AGE     LABELS
+nginx-deployment-7d6869886d-5nm7l      1/1     Running   0          4h6m    app=nginx-deployment,pod-template-hash=7d6869886d
+nginx-deployment-7d6869886d-89mdz      1/1     Running   0          4h6m    app=nginx-deployment,pod-template-hash=7d6869886d
+nginx-deployment-7d6869886d-bgrd9      1/1     Running   0          4h5m    app=nginx-deployment,pod-template-hash=7d6869886d
+nginx-yaml-deployment-7bc6d8c9-h8vvx   1/1     Running   0          143m    app=nginx-yaml,pod-template-hash=7bc6d8c9
+nginx-yaml-deployment-7bc6d8c9-kjt56   1/1     Running   0          143m    app=nginx-yaml,pod-template-hash=7bc6d8c9
+nginx-yaml-deployment-7bc6d8c9-kztk6   1/1     Running   0          120m    app=nginx-yaml,pod-template-hash=7bc6d8c9
+test-pod                               1/1     Running   0          3h10m   app=other
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl apply -f nginx-yaml-deployment.yaml
+deployment.apps/nginx-yaml-deployment configured
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl rollout status deployment/nginx-yaml-deployment
+Waiting for deployment "nginx-yaml-deployment" rollout to finish: 1 out of 3 new replicas have been updated...
+Waiting for deployment "nginx-yaml-deployment" rollout to finish: 1 out of 3 new replicas have been updated...
+Waiting for deployment "nginx-yaml-deployment" rollout to finish: 1 out of 3 new replicas have been updated...
+Waiting for deployment "nginx-yaml-deployment" rollout to finish: 2 out of 3 new replicas have been updated...
+Waiting for deployment "nginx-yaml-deployment" rollout to finish: 2 out of 3 new replicas have been updated...
+Waiting for deployment "nginx-yaml-deployment" rollout to finish: 2 out of 3 new replicas have been updated...
+Waiting for deployment "nginx-yaml-deployment" rollout to finish: 2 out of 3 new replicas have been updated...
+Waiting for deployment "nginx-yaml-deployment" rollout to finish: 1 old replicas are pending termination...
+Waiting for deployment "nginx-yaml-deployment" rollout to finish: 1 old replicas are pending termination...
+Waiting for deployment "nginx-yaml-deployment" rollout to finish: 1 old replicas are pending termination...
+deployment "nginx-yaml-deployment" successfully rolled out
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl get pods -w
+NAME                                     READY   STATUS    RESTARTS   AGE
+nginx-deployment-7d6869886d-5nm7l        1/1     Running   0          4h9m
+nginx-deployment-7d6869886d-89mdz        1/1     Running   0          4h9m
+nginx-deployment-7d6869886d-bgrd9        1/1     Running   0          4h8m
+nginx-yaml-deployment-5874795ff8-5wwrm   1/1     Running   0          44s
+nginx-yaml-deployment-5874795ff8-nf6vg   1/1     Running   0          37s
+nginx-yaml-deployment-5874795ff8-vqpsn   1/1     Running   0          103s
+test-pod                                 1/1     Running   0          3h13m
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl get replicasets
+NAME                               DESIRED   CURRENT   READY   AGE
+nginx-deployment-7d6869886d        3         3         3       4h13m
+nginx-yaml-deployment-5874795ff8   3         3         3       2m41s
+nginx-yaml-deployment-7bc6d8c9     0         0         0       147m
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl rollout history deployment/nginx-yaml-deployment
+deployment.apps/nginx-yaml-deployment
+REVISION  CHANGE-CAUSE
+1         <none>
+2         <none>
+
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl rollout undo deployment/nginx-yaml-deployment
+Warning: resource deployments/nginx-yaml-deployment was previously managed with 'kubectl apply'. Rolling back will not update the kubectl.kubernetes.io/last-applied-configuration annotation, which may cause unexpected behavior on future 'kubectl apply' operations. Consider using 'kubectl apply' with your previous configuration file instead.
+deployment.apps/nginx-yaml-deployment rolled back
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl get replicasets
+NAME                               DESIRED   CURRENT   READY   AGE
+nginx-deployment-7d6869886d        3         3         3       4h15m
+nginx-yaml-deployment-5874795ff8   0         0         0       5m8s
+nginx-yaml-deployment-7bc6d8c9     3         3         3       149m
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl get pods -w
+NAME                                   READY   STATUS    RESTARTS   AGE
+nginx-deployment-7d6869886d-5nm7l      1/1     Running   0          4h13m
+nginx-deployment-7d6869886d-89mdz      1/1     Running   0          4h13m
+nginx-deployment-7d6869886d-bgrd9      1/1     Running   0          4h12m
+nginx-yaml-deployment-7bc6d8c9-h6785   1/1     Running   0          81s
+nginx-yaml-deployment-7bc6d8c9-n6tx5   1/1     Running   0          82s
+nginx-yaml-deployment-7bc6d8c9-qr6l6   1/1     Running   0          83s
+test-pod                               1/1     Running   0          3h18m
+test-pod                               1/1     Running   0          3h18m
+nginx-yaml-deployment-7bc6d8c9-qr6l6   1/1     Running   0          2m20s
+nginx-yaml-deployment-7bc6d8c9-h6785   1/1     Running   0          2m44s
+nginx-deployment-7d6869886d-bgrd9      1/1     Running   0          4h14m
+nginx-yaml-deployment-7bc6d8c9-h6785   1/1     Running   0          4m9s
+nginx-deployment-7d6869886d-bgrd9      1/1     Running   0          4h15m
+nginx-yaml-deployment-7bc6d8c9-qr6l6   1/1     Running   0          4m47s
+nginx-yaml-deployment-7bc6d8c9-n6tx5   1/1     Running   0          5m20s
+nginx-deployment-7d6869886d-5nm7l      1/1     Running   0          4h18m
+nginx-yaml-deployment-7bc6d8c9-n6tx5   1/1     Running   0          6m37s
+nginx-yaml-deployment-7bc6d8c9-h6785   1/1     Running   0          6m43s
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl apply -y configmap.yaml
+error: unknown shorthand flag: 'y' in -y
+See 'kubectl apply --help' for usage.
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl apply -f configmap.yaml
+error: resource mapping not found for name: "nginx-config" namespace: "" from "configmap.yaml": no matches for kind "configMap" in version "v1"
+ensure CRDs are installed first
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl apply -f configmap.yaml
+error: resource mapping not found for name: "nginx-config" namespace: "" from "configmap.yaml": no matches for kind "ConfiMap" in version "v1"
+ensure CRDs are installed first
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl apply -y configmap.yaml
+error: unknown shorthand flag: 'y' in -y
+See 'kubectl apply --help' for usage.
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl apply -f configmap.yaml
+configmap/nginx-config created
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl get configmaps
+NAME               DATA   AGE
+kube-root-ca.crt   1      6h20m
+nginx-config       2      24s
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl describe configmaps nginx-config
+Name:         nginx-config
+Namespace:    default
+Labels:       <none>
+Annotations:  <none>
+
+Data
+====
+APP_MESSAGE:
+----
+HELLO from Kubernetes ConfigMap!!
+
+APP_MODE:
+----
+development
+
+
+BinaryData
+====
+
+Events:  <none>
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl apply -f configmap-demo.yaml
+deployment.apps/configmap-demo created
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl get pods
+NAME                                   READY   STATUS    RESTARTS   AGE
+configmap-demo-56ffbb8-fb44p           1/1     Running   0          11s
+nginx-deployment-7d6869886d-5nm7l      1/1     Running   0          4h32m
+nginx-deployment-7d6869886d-89mdz      1/1     Running   0          4h32m
+nginx-deployment-7d6869886d-bgrd9      1/1     Running   0          4h31m
+nginx-yaml-deployment-7bc6d8c9-h6785   1/1     Running   0          20m
+nginx-yaml-deployment-7bc6d8c9-n6tx5   1/1     Running   0          20m
+nginx-yaml-deployment-7bc6d8c9-qr6l6   1/1     Running   0          20m
+test-pod                               1/1     Running   0          3h37m
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl get pod
+NAME                                   READY   STATUS    RESTARTS   AGE
+configmap-demo-56ffbb8-fb44p           1/1     Running   0          39s
+nginx-deployment-7d6869886d-5nm7l      1/1     Running   0          4h33m
+nginx-deployment-7d6869886d-89mdz      1/1     Running   0          4h33m
+nginx-deployment-7d6869886d-bgrd9      1/1     Running   0          4h32m
+nginx-yaml-deployment-7bc6d8c9-h6785   1/1     Running   0          20m
+nginx-yaml-deployment-7bc6d8c9-n6tx5   1/1     Running   0          20m
+nginx-yaml-deployment-7bc6d8c9-qr6l6   1/1     Running   0          21m
+test-pod                               1/1     Running   0          3h37m
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl -it configmap-demo-56ffbb8-fb44p -- sh
+Error: flags cannot be placed before plugin name: -it
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl exec -it configmap-demo-56ffbb8-fb44p -- sh
+/ # echo $APP_MODE
+development
+/ # echo $APP_MESSAGE
+HELLO from Kubernetes ConfigMap!!
+/ # exit
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl apply -f secret.yaml
+Error from server (BadRequest): error when creating "secret.yaml": secret in version "v1" cannot be handled as a Secret: no kind "secret" is registered forversion "v1" in scheme "pkg/api/legacyscheme/scheme.go:30"
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl apply -f secret.yaml
+secret/app-secret created
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl get services
+NAME                 TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)        AGE
+kubernetes           ClusterIP   10.96.0.1       <none>        443/TCP        6h38m
+nginx-deployment     NodePort    10.96.118.242   <none>        80:32430/TCP   4h22m
+nginx-yaml-service   NodePort    10.96.181.24    <none>        80:30326/TCP   168m
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl get secrets
+NAME         TYPE     DATA   AGE
+app-secret   Opaque   2      56s
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl get secret app-secret -o yaml
+apiVersion: v1
+data:
+  DB_PASSWORD: MTIzZGJwYXNz
+  DB_USERNAME: YWRtaW4=
+kind: Secret
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","kind":"Secret","metadata":{"annotations":{},"name":"app-secret","namespace":"default"},"stringData":{"DB_PASSWORD":"123dbpass","DB_USERNAME":"admin"},"type":"Opaque"}
+  creationTimestamp: "2026-10-02T17:41:43Z"
+  name: app-secret
+  namespace: default
+  resourceVersion: "26241"
+  uid: ec342ba1-6ef4-4980-a06b-d96ea8387c4e
+type: Opaque
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl apply -f volume-demo.yaml
+error: resource mapping not found for name: "volume-demo" namespace: "" from "volume-demo.yaml": no matches for kind "Deployment" in version "v1"
+ensure CRDs are installed first
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl apply -f volume-demo.yaml
+error: resource mapping not found for name: "volume-demo" namespace: "" from "volume-demo.yaml": no matches for kind "Deployments" in version "v1"
+ensure CRDs are installed first
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl apply -f volume-demo.yaml
+Error from server (BadRequest): error when creating "volume-demo.yaml": Deployment in version "v1" cannot be handled as a Deployment: json: cannot unmarshal object into Go struct field Container.spec.template.spec.containers.volumeMounts of type []v1.VolumeMount
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl apply -f volume-demo.yaml
+Error from server (BadRequest): error when creating "volume-demo.yaml": Deployment in version "v1" cannot be handled as a Deployment: json: cannot unmarshal object into Go struct field Container.spec.template.spec.containers.volumeMounts of type []v1.VolumeMount
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl apply -f volume-demo.yaml
+Error from server (BadRequest): error when creating "volume-demo.yaml": Deployment in version "v1" cannot be handled as a Deployment: strict decoding error: unknown field "spec.template.spec.containers[0].comamnd", unknown field "spec.volumes"
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl apply -f volume-demo.yaml
+Error from server (BadRequest): error when creating "volume-demo.yaml": Deployment in version "v1" cannot be handled as a Deployment: strict decoding error: unknown field "spec.volumes"
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl apply -f volume-demo.yaml
+deployment.apps/volume-demo created
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl get pods
+NAME                                   READY   STATUS    RESTARTS   AGE
+configmap-demo-56ffbb8-fb44p           1/1     Running   0          12h
+nginx-deployment-7d6869886d-5nm7l      1/1     Running   0          17h
+nginx-deployment-7d6869886d-89mdz      1/1     Running   0          17h
+nginx-deployment-7d6869886d-bgrd9      1/1     Running   0          17h
+nginx-yaml-deployment-7bc6d8c9-h6785   1/1     Running   0          12h
+nginx-yaml-deployment-7bc6d8c9-n6tx5   1/1     Running   0          12h
+nginx-yaml-deployment-7bc6d8c9-qr6l6   1/1     Running   0          12h
+test-pod                               1/1     Running   0          16h
+volume-demo-665ccb56df-zw5s2           1/1     Running   0          11h
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl exec -it volume-demo-665ccb56df-zw5s2 -- sh
+/ # cd /data
+/data # echo"hello from kubernates Volume" > test.txt
+sh: echohello from kubernates Volume: not found
+/data # echo "hello from kubernates Volume" > test.txt
+/data # cat test.txt
+hello from kubernates Volume
+/data # exit
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl delete pod volume-demo-665ccb56df-zw5s2
+pod "volume-demo-665ccb56df-zw5s2" deleted from default namespace
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectlk
+'kubectlk' is not recognized as an internal or external command,
+operable program or batch file.
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl get pods
+NAME                                   READY   STATUS        RESTARTS   AGE
+configmap-demo-56ffbb8-fb44p           1/1     Running       0          12h
+nginx-deployment-7d6869886d-5nm7l      1/1     Running       0          17h
+nginx-deployment-7d6869886d-89mdz      1/1     Running       0          17h
+nginx-deployment-7d6869886d-bgrd9      1/1     Running       0          17h
+nginx-yaml-deployment-7bc6d8c9-h6785   1/1     Running       0          12h
+nginx-yaml-deployment-7bc6d8c9-n6tx5   1/1     Running       0          12h
+nginx-yaml-deployment-7bc6d8c9-qr6l6   1/1     Running       0          12h
+test-pod                               1/1     Running       0          16h
+volume-demo-665ccb56df-pj9hq           1/1     Running       0          26s
+volume-demo-665ccb56df-zw5s2           1/1     Terminating   0          11h
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl exec -it volume-demo-665ccb56df-pj9hq -- sh
+/ # cd /data
+/data # cat test.txt
+cat: can't open 'test.txt': No such file or directory
+/data # E1003 14:34:11.700432   27220 v2.go:151] "Copying stdout failed" err="next reader: read tcp 127.0.0.1:60037->127.0.0.1:52972: i/o timeout"
+E1003 14:34:11.748264   27220 v2.go:130] "Waiting for server to close stdin failed" err="next reader: read tcp 127.0.0.1:60037->127.0.0.1:52972: i/o timeout"
+error: error reading from error stream: next reader: read tcp 127.0.0.1:60037->127.0.0.1:52972: i/o timeout
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl apply -f app-pvc.yaml
+Error from server (BadRequest): error when creating "app-pvc.yaml": PersistentVolumeClaim in version "v1" cannot be handled as a PersistentVolumeClaim: strict decoding error: unknown field "spec.accesModes"
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl apply -f app-pvc.yaml
+persistentvolumeclaim/app-pvc created
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl get pvc
+NAME      STATUS    VOLUME   CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE
+app-pvc   Pending                                      standard       <unset>                 12s
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl apply -f storage-pod.yaml
+Error from server (BadRequest): error when creating "storage-pod.yaml": Pod in version "v1" cannot be handled as a Pod: strict decoding error: unknown field "spec.containers[0].volumeMounts[0].mount-path"
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl apply -f storage-pod.yaml
+The Pod "storage-DB_PASSWORD" is invalid: metadata.name: Invalid value: "storage-DB_PASSWORD": a lowercase RFC 1123 subdomain must consist of lower case alphanumeric characters, '-' or '.', and must start and end with an alphanumeric character (e.g. 'example.com', regex used for validation is '[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*')
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl apply -f storage-pod.yaml
+pod/storage-pod created
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl get pods
+NAME                                   READY   STATUS    RESTARTS   AGE
+configmap-demo-56ffbb8-fb44p           1/1     Running   0          17h
+nginx-deployment-7d6869886d-5nm7l      1/1     Running   0          22h
+nginx-deployment-7d6869886d-89mdz      1/1     Running   0          22h
+nginx-deployment-7d6869886d-bgrd9      1/1     Running   0          22h
+nginx-yaml-deployment-7bc6d8c9-h6785   1/1     Running   0          17h
+nginx-yaml-deployment-7bc6d8c9-n6tx5   1/1     Running   0          17h
+nginx-yaml-deployment-7bc6d8c9-qr6l6   1/1     Running   0          17h
+storage-pod                            1/1     Running   0          9s
+test-pod                               1/1     Running   0          21h
+volume-demo-665ccb56df-pj9hq           1/1     Running   0          5h2m
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl describe pod storage-pod
+Name:             storage-pod
+Namespace:        default
+Priority:         0
+Service Account:  default
+Node:             desktop-control-plane/172.19.0.2
+Start Time:       Sat, 03 Oct 2026 16:34:32 +0530
+Labels:           <none>
+Annotations:      <none>
+Status:           Running
+IP:               10.244.0.25
+IPs:
+  IP:  10.244.0.25
+Containers:
+  app:
+    Container ID:  containerd://15f0f60c6763f9e655f1549c4ff4a6d1c0e5215ce23e8354511892a583c422e5
+    Image:         busybox:latest
+    Image ID:      docker.io/library/busybox@sha256:fd7dc98638c8e305f4dc34e979f1c0fdfdcaeb0fbf8fcff77ae834b6da3d7e6e
+    Port:          <none>
+    Host Port:     <none>
+    Command:
+      sh
+      -c
+      while true; do
+        echo "Storage Pod is Running"
+        sleep 10
+      done
+
+    State:          Running
+      Started:      Sat, 03 Oct 2026 16:34:33 +0530
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /data from app-storage (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-nzcql (ro)
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   True
+  Initialized                 True
+  Ready                       True
+  ContainersReady             True
+  PodScheduled                True
+Volumes:
+  app-storage:
+    Type:       PersistentVolumeClaim (a reference to a PersistentVolumeClaim in the same namespace)
+    ClaimName:  app-pvc
+    ReadOnly:   false
+  kube-api-access-nzcql:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    Optional:                false
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type    Reason     Age   From               Message
+  ----    ------     ----  ----               -------
+  Normal  Scheduled  27s   default-scheduler  Successfully assigned default/storage-pod to desktop-control-plane
+  Normal  Pulling    26s   kubelet            spec.containers{app}: Pulling image "busybox:latest"
+  Normal  Pulled     26s   kubelet            spec.containers{app}: Successfully pulled image "busybox:latest" in 44ms (44ms including waiting). Image size: 2236767 bytes.
+  Normal  Created    26s   kubelet            spec.containers{app}: Container created
+  Normal  Started    26s   kubelet            spec.containers{app}: Container started
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl exec -it storage-pod -- sh
+/ # cd /data
+/data # echo"This is data inside the storage pod but survives the pod deletion" > test.txt
+sh: echoThis is data inside the storage pod but survives the pod deletion: not found
+/data # echo "This is data inside the storage pod but survives the pod deletion" > test.txt
+/data # cat test.txt
+This is data inside the storage pod but survives the pod deletion
+/data # exit
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl delete pod storage-pod
+pod "storage-pod" deleted from default namespace
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl delete pod storage-pod
+pod "storage-pod" deleted from default namespace
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl apply -f storage-pod.yaml
+pod/storage-pod created
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl exec -it storage-pod -- sh
+/ # cd /data
+/data # cat test.txt
+This is data inside the storage pod but survives the pod deletion
+/data # exit
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl get storageclass
+NAME                 PROVISIONER             RECLAIMPOLICY   VOLUMEBINDINGMODE      ALLOWVOLUMEEXPANSION   AGE
+hostpath             rancher.io/local-path   Delete          WaitForFirstConsumer   false                  24h
+standard (default)   rancher.io/local-path   Delete          WaitForFirstConsumer   false                  24h
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl get storageclass -o wide
+NAME                 PROVISIONER             RECLAIMPOLICY   VOLUMEBINDINGMODE      ALLOWVOLUMEEXPANSION   AGE
+hostpath             rancher.io/local-path   Delete          WaitForFirstConsumer   false                  24h
+standard (default)   rancher.io/local-path   Delete          WaitForFirstConsumer   false                  24h
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl get pvc
+NAME      STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE
+app-pvc   Bound    pvc-3bd47240-c70a-4a9d-a2d3-ab40dd1b08dd   1Gi        RWO            standard       <unset>                 26m
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl get pv
+NAME                                       CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS   CLAIM             STORAGECLASS   VOLUMEATTRIBUTESCLASS   REASON   AGE
+pvc-3bd47240-c70a-4a9d-a2d3-ab40dd1b08dd   1Gi        RWO            Delete           Bound    default/app-pvc   standard       <unset>     19m
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl apply -f nginx-yaml-deployment.yaml
+deployment.apps/nginx-yaml-deployment configured
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl rollout status deployment/nginx-yaml-deployment
+deployment "nginx-yaml-deployment" successfully rolled out
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl get pods
+NAME                                     READY   STATUS    RESTARTS   AGE
+configmap-demo-56ffbb8-fb44p             1/1     Running   0          18h
+nginx-deployment-7d6869886d-5nm7l        1/1     Running   0          22h
+nginx-deployment-7d6869886d-89mdz        1/1     Running   0          22h
+nginx-deployment-7d6869886d-bgrd9        1/1     Running   0          22h
+nginx-yaml-deployment-775bd5d5bd-bwlxn   1/1     Running   0          45s
+nginx-yaml-deployment-775bd5d5bd-szp5l   1/1     Running   0          42s
+nginx-yaml-deployment-775bd5d5bd-vqhnn   1/1     Running   0          50s
+storage-pod                              1/1     Running   0          38m
+test-pod                                 1/1     Running   0          21h
+volume-demo-665ccb56df-pj9hq             1/1     Running   0          5h44m
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl descirbe pod nginx-yaml-deployment-775bd5d5bd-bwlxn
+error: unknown command "descirbe" for "kubectl"
+
+Did you mean this?
+        describe
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl descirbe nginx-yaml-deployment-775bd5d5bd-bwlxn
+error: unknown command "descirbe" for "kubectl"
+
+Did you mean this?
+        describe
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>kubectl describe pod nginx-yaml-deployment-775bd5d5bd-bwlxn
+Name:             nginx-yaml-deployment-775bd5d5bd-bwlxn
+Namespace:        default
+Priority:         0
+Service Account:  default
+Node:             desktop-control-plane/172.19.0.2
+Start Time:       Sat, 03 Oct 2026 17:16:34 +0530
+Labels:           app=nginx-yaml
+                  pod-template-hash=775bd5d5bd
+Annotations:      <none>
+Status:           Running
+IP:               10.244.0.28
+IPs:
+  IP:           10.244.0.28
+Controlled By:  ReplicaSet/nginx-yaml-deployment-775bd5d5bd
+Containers:
+  nginx-yaml-containers:
+    Container ID:   containerd://50868b004856f71678dab3c7954bde48c4e6f648c5827bd6f1d6a5be88819442
+    Image:          nginx:1.27
+    Image ID:       docker.io/library/nginx@sha256:6784fb0834aa7dbbe12e3d7471e69c290df3e6ba810dc38b34ae33d3c1c05f7d
+    Port:           80/TCP
+    Host Port:      0/TCP
+    State:          Running
+      Started:      Sat, 03 Oct 2026 17:16:37 +0530
+    Ready:          True
+    Restart Count:  0
+    Limits:
+      cpu:     500m
+      memory:  256Mi
+    Requests:
+      cpu:        100m
+      memory:     128Mi
+    Environment:  <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-jlblr (ro)
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   True
+  Initialized                 True
+  Ready                       True
+  ContainersReady             True
+  PodScheduled                True
+Volumes:
+  kube-api-access-jlblr:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    Optional:                false
+    DownwardAPI:             true
+QoS Class:                   Burstable
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type    Reason     Age   From               Message
+  ----    ------     ----  ----               -------
+  Normal  Scheduled  107s  default-scheduler  Successfully assigned default/nginx-yaml-deployment-775bd5d5bd-bwlxn to desktop-control-plane
+  Normal  Pulling    107s  kubelet            spec.containers{nginx-yaml-containers}: Pulling image "nginx:1.27"
+  Normal  Pulled     104s  kubelet            spec.containers{nginx-yaml-containers}: Successfully pulled image "nginx:1.27" in 2.691s (2.691s including waiting). Image size: 72406859 bytes.
+  Normal  Created    104s  kubelet            spec.containers{nginx-yaml-containers}: Container created
+  Normal  Started    104s  kubelet            spec.containers{nginx-yaml-containers}: Container started
+
+D:\STudy\Docker_Kubernets Explorer\compose-demo>

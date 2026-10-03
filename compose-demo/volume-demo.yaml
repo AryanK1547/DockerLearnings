@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: volume-demo
+
+spec:
+  replicas: 1
+  selector: 
+    matchLabels: 
+      app: volume-demo
+  template:
+    metadata:
+      labels:
+        app: volume-demo
+    spec:
+      containers:
+        - name: demo
+          image: busybox:latest
+          command: 
+            - sh
+            - -c
+            - |
+              while true; do
+                echo "Container is running"
+                sleep 10
+              done
+          volumeMounts:
+            - name: app-storage
+              mountPath: /data 
+      volumes: 
+        - name: app-storage
+          emptyDir: {}          

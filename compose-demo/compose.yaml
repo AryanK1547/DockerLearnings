@@ -1,0 +1,13 @@
+services:
+  web:
+    image: nginx:latest
+    ports: 
+          - "8083:80"
+    volumes:
+          - webdata:/usr/share/nginx/html
+  client:
+    image: busybox:latest
+    command: ["sh", "-c", "sleep 3600"]
+
+volumes:
+  webdata:
